@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   
+    <!-- google fonts  -->
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Shadows+Into+Light&display=swap" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+ <!-- CSS  -->
+ <link rel="stylesheet" href="styles.css"> 
+    <title>CommonKnowledgeQuiz</title>
+</head>
+<body>
+        <div id ="topper" class="jumbotron jumbotron-fluid p-0">
+            <div class="top-page container d-flex flex-row justify-content-center align-items-center ">
+              <h1 class="display-4">Are You Even Close to Being Smart...???</h1>
+              <p class="lead"><h4>Come test yourself, you might just be smarter than my dog...<img src="doggie.png" alt="dog icon">...doubt it though ;)</h4></p>
+            </div>
+            <div class = "container">
+                <div class = "row justify-content-center">
+                    <button id="start-btn" type="button" class="btn btn-outline-warning btn-lg mt-1 ml-5">Start Quiz</button>
+                  
+                </div>
+            </div>
+        </div>
+
+  
+
+        <div id="catch-answer" class = "container border border-light">
+            <div class = "bottom-quest row justify-content-center align-items-center">
+                <div class="col">
+                    <p class="quizQuestion">This is where I will be writing the questions to the quiz?</p>
+                </div>
+            </div>
+            <div class="bottom-ans row  ">
+                <div id = "choice-one" class=" col-4 border border-light ">                                      
+                    <p class ="opt1" >Option 1</p>
+                </div>
+                <div id = "choice-two" class=" col-4 border border-light ">
+                    <p class ="opt2" >Option 2</p>
+                </div>
+                <div id="choice-three" class=" col-4 border border-light "> 
+                    <p class ="opt3" >Option 3</p>
+                </div>
+            </div>
+           <div class="row ">
+                <img src="timer.png" alt="timer icon" height="50" width="50"> 
+                <div class="col-4">
+                    <p id = "timer">75 </p>
+                </div>
+                <div class = "col-4 m-1 d-flex flex-row justify-content-center align-items-center">
+                        <p>Score</p><p id="final-score">:   100</p>
+                </div>
+            </div>
+            <div class = "row ">
+                <div class="right-wrong col-12 d-flex flex-row justify-content-around">
+                   <div id="right"><img src="correct.png" alt="correct icon" height="80" width="80"> </div> 
+                   <div id = "wrong"><img src="wrong.png" alt="wrong icon" height="80" width="80"> </div> 
+                </div>
+            </div>
+        </div>
+        <h1>Top Score <span class="badge badge-warning mt-5">N.K</span><span class="badge badge-warning mt-4"> 60</span></h1>
+
+    
+    <script src="script.js"></script>
+</body>
+</html>
+ 

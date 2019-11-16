@@ -1,0 +1,69 @@
+body {
+    background-image: linear-gradient(to bottom right,#cc2b5e, #6e0c61);
+    color:white;
+}
+
+
+.top-page {
+    background-color: #8A0651;
+    color: linen;
+    font-family: 'Indie Flower', cursive;
+    
+}
+#topper {
+   background-color: black;
+   
+}
+
+.quizQuestion {
+    height:4rem;
+    color: white;
+    font-size: 30px;
+    
+}
+.bottom-quest {
+    background-color: black;
+    font-family: 'Shadows Into Light', cursive;
+}
+
+
+.bottom-ans{
+    height: 5rem;
+    color: linen;
+    font-size: 2rem;
+    font-family: 'Shadows Into Light', cursive;
+}
+
+
+p {
+    color:linen;
+    font-size: 2rem;
+    font-family: 'Shadows Into Light', cursive;
+}
+#choice-one {
+    border: 1px dotted white;
+    }
+
+#choice-one :hover {
+border: 2px solid darkorange;
+}
+
+#choice-two :hover {
+    border: 2px solid darkorange;
+    }
+#choice-three :hover {
+        border: 2px solid darkorange;
+        }
+#final-score {
+    border-top: 1px solid darkorange;
+    border-bottom: 1px solid darkorange;
+    color: darkorange;  
+    font-weight: 300;
+}
+
+#right{
+    opacity: 0.0;
+}
+#wrong{
+    opacity: 0.0;
+}
