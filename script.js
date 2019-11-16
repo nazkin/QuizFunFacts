@@ -27,11 +27,17 @@ var dataArr = [
      answer: "Cisco"
     }
 ];
+
+
+
+var retrieveTopScore = 0;
+localStorage.getItem("MaxScore") ? retrieveTopScore = JSON.parse(localStorage.getItem("MaxScore")) : localStorage.setItem("MaxScore", JSON.stringify(retrieveTopScore));
 //Write our data structure to local memory 
 var memoryData = localStorage.setItem("questions", JSON.stringify(dataArr));
 var questionCounter = 0;
 var retrieveFromMemory;
-var start = 75;//The start of time countdown
+retrieveFromMemory = JSON.parse(localStorage.getItem("questions"));
+var start;//The start of time countdown
 var timer;//the time interval function that is used globally and counts down from the start variable
 //Set up your DOM items
 var identsDOM = {
@@ -56,7 +62,7 @@ function init(){
 }
  init();
 //Start Button to initiate the first question and the timer
-retrieveFromMemory = JSON.parse(localStorage.getItem("questions"));
+
 
 var displayQuestions = function() {
     identsDOM.displayQuestion.textContent = retrieveFromMemory[questionCounter].quest;
@@ -68,17 +74,20 @@ var displayQuestions = function() {
 var runningQuiz = function() {
     displayQuestions();
         //Create a timer function to keep the count going- keep it stable for now 
-    var start = 75;
+    start = 75;
     identsDOM.counter.textContent = start;
     console.log(start);
-    var timer =  setInterval(function() {
-        if(start > 50) {
+    timer =  setInterval(function() {
+        if(start > 0) {
             start--;
             identsDOM.counter.textContent = start;
         }
         else {
             clearInterval(timer);
-            console.log("The End, go fuck yourself");
+            identsDOM.userScore.textContent = "-- 0";
+            identsDOM.displayQuestion.style.fontSize = "32px";
+            identsDOM.displayQuestion.style.color = "darkorange";
+            identsDOM.displayQuestion.textContent = "YOU RAN OUT OF TIME SO YOU ARE NOT SMARTER THAN MY DOG" ;
         }
 
         }, 1000);
@@ -89,6 +98,14 @@ var runningQuiz = function() {
  identsDOM.startBtn.addEventListener('click', runningQuiz);
 
 
+var endingConditions = function() {
+    identsDOM.displayQuestion.style.fontSize = "32px";
+    identsDOM.displayQuestion.style.color = "darkorange";
+    identsDOM.counter.textContent = "";
+    identsDOM.displayA.textContent = "";
+    identsDOM.displayB.textContent = "";
+    identsDOM.displayC.textContent = "";
+}; 
 var userChoice = function(event){
     var userChoice;
     userChoice = event.target.firstChild.textContent;
@@ -101,16 +118,32 @@ var userChoice = function(event){
        else{
         identsDOM.wrong.style.opacity = "1.0";
         setTimeout(function(){identsDOM.wrong.style.opacity = "0.0";  }, 200);
+        //Remove 15 seconds from the countdown
+        start -= 15;
        }
        questionCounter++;
-     console.log(questionCounter);
     
   if(questionCounter !== retrieveFromMemory.length){
     displayQuestions();    
 
   } 
   else if(questionCounter >= retrieveFromMemory.length)  {
-      console.log('Youre done');
+      //Stop the timer 
+      clearInterval(timer);
+      //Set final score equal to timer
+      identsDOM.userScore.textContent = "-- " + start;
+      if(start > retrieveTopScore) {
+        //Set a new highScore
+        localStorage.setItem("MaxScore", JSON.stringify(start));
+        endingConditions();
+        identsDOM.displayQuestion.textContent = "NEW TOP SCORE:  " + start
+      }
+      else {
+          //Display a the end of quiz banners
+      endingConditions();
+      identsDOM.displayQuestion.textContent = "END OF QUIZ: YOUR SCORE IS:  " + start + ".............ALMOST AS SMART AS MY DOG";
+      }
+           
   }
   
 }
