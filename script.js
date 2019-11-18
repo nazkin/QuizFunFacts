@@ -1,3 +1,10 @@
+//TODO: 1) Change the ternary operator to if statement because you need 2 statements after condition
+    //  2) Transfer the value of the max score to the DOM 
+    //  3) Add the new if statement into the init function
+    //  4) Add sound ??? why not 
+
+
+
 //Create an array of objects to store all the multiple choice questions
 
 var dataArr = [
@@ -29,16 +36,31 @@ var dataArr = [
 ];
 
 
+// If the MaxScore key exists in local storage -condition1 else -condition2
+if(localStorage.getItem("MaxScore")) {
+    
+    retrieveTopScore = JSON.parse(localStorage.getItem("MaxScore"));
+}
 
-var retrieveTopScore = 0;
-localStorage.getItem("MaxScore") ? retrieveTopScore = JSON.parse(localStorage.getItem("MaxScore")) : localStorage.setItem("MaxScore", JSON.stringify(retrieveTopScore));
-//Write our data structure to local memory 
+else {
+    retrieveTopScore = 0;
+    localStorage.setItem("MaxScore", JSON.stringify(retrieveTopScore));
+    retrieveTopScore = JSON.parse(localStorage.getItem("MaxScore"));
+}
+
+
+
+
+
+//Write our data structure to local memory and capture it back
 var memoryData = localStorage.setItem("questions", JSON.stringify(dataArr));
-var questionCounter = 0;
 var retrieveFromMemory;
 retrieveFromMemory = JSON.parse(localStorage.getItem("questions"));
+
 var start;//The start of time countdown
 var timer;//the time interval function that is used globally and counts down from the start variable
+var questionCounter = 0; //Counts the number of the question
+
 //Set up your DOM items
 var identsDOM = {
     startBtn: document.querySelector('#start-btn'),
@@ -50,7 +72,9 @@ var identsDOM = {
     answer: document.querySelector('.bottom-ans'),
     userScore: document.querySelector('#final-score'),
     right: document.querySelector('#right'),
-    wrong: document.querySelector('#wrong')
+    wrong: document.querySelector('#wrong'),
+    record: document.querySelector('.badge'),
+    reset: document.querySelector('#reset-btn')
 };
 
 function init(){
@@ -59,6 +83,7 @@ function init(){
     identsDOM.displayC.textContent = "";
     identsDOM.displayQuestion.textContent = "";
     identsDOM.userScore.textContent = "";
+    questionCounter = 0;
 }
  init();
 //Start Button to initiate the first question and the timer
@@ -87,14 +112,12 @@ var runningQuiz = function() {
             identsDOM.userScore.textContent = "-- 0";
             identsDOM.displayQuestion.style.fontSize = "32px";
             identsDOM.displayQuestion.style.color = "darkorange";
-            identsDOM.displayQuestion.textContent = "YOU RAN OUT OF TIME SO YOU ARE NOT SMARTER THAN MY DOG" ;
+            identsDOM.displayQuestion.textContent = "YOU RAN OUT OF TIME " ;
         }
 
         }, 1000);
-
-//Read questions from your data structure and display them 
-
 }; 
+//Start click event 
  identsDOM.startBtn.addEventListener('click', runningQuiz);
 
 
@@ -105,7 +128,9 @@ var endingConditions = function() {
     identsDOM.displayA.textContent = "";
     identsDOM.displayB.textContent = "";
     identsDOM.displayC.textContent = "";
+    identsDOM.record.textContent = retrieveTopScore;
 }; 
+
 var userChoice = function(event){
     var userChoice;
     userChoice = event.target.firstChild.textContent;
@@ -141,17 +166,19 @@ var userChoice = function(event){
       else {
           //Display a the end of quiz banners
       endingConditions();
-      identsDOM.displayQuestion.textContent = "END OF QUIZ: YOUR SCORE IS:  " + start + ".............ALMOST AS SMART AS MY DOG";
+      identsDOM.displayQuestion.textContent = "END OF QUIZ: YOUR SCORE IS:  " + start + "...........TRY AGAIN?";
       }
            
   }
   
 }
+//Capturing the click event from the user choice to progress with the quiz
  identsDOM.answer.addEventListener('click', userChoice);
 
 
- 
+ //Event listener for the reset button 
 
+identsDOM.reset.addEventListener('click', init);
 
 
 
