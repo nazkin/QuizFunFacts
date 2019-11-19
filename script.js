@@ -1,7 +1,3 @@
-//TODO: 1) Change the ternary operator to if statement because you need 2 statements after condition
-    //  2) Transfer the value of the max score to the DOM 
-    //  3) Add the new if statement into the init function
-    //  4) Add sound ??? why not 
 
 
 
@@ -59,7 +55,7 @@ retrieveFromMemory = JSON.parse(localStorage.getItem("questions"));
 
 var start;//The start of time countdown
 var timer;//the time interval function that is used globally and counts down from the start variable
-var questionCounter = 0; //Counts the number of the question
+var questionCounter; //Counts the number of the question
 
 //Set up your DOM items
 var identsDOM = {
@@ -84,6 +80,7 @@ function init(){
     identsDOM.displayQuestion.textContent = "";
     identsDOM.userScore.textContent = "";
     questionCounter = 0;
+    start = 75;
 }
  init();
 //Start Button to initiate the first question and the timer
@@ -99,7 +96,7 @@ var displayQuestions = function() {
 var runningQuiz = function() {
     displayQuestions();
         //Create a timer function to keep the count going- keep it stable for now 
-    start = 75;
+    
     identsDOM.counter.textContent = start;
     console.log(start);
     timer =  setInterval(function() {
@@ -178,7 +175,12 @@ var userChoice = function(event){
 
  //Event listener for the reset button 
 
-identsDOM.reset.addEventListener('click', init);
+identsDOM.reset.addEventListener('click', function() {
+    init();
+    displayQuestions();
+    timer();
+    
+});
 
 
 
